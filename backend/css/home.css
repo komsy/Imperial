@@ -1,0 +1,41 @@
+/*--------------------------------------------------------------
+# Welcome
+--------------------------------------------------------------*/
+.container {
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+h2 {
+  font-size: 26px;
+  margin: 20px 0;
+  text-align: center;
+  small {
+    font-size: 0.5em;
+  }
+}
+.log{
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.add{
+  border-radius: 20px;
+  background-color: green;
+}
+.add h4{
+  color: white;
+  padding-top: 10px; 
+  font-style: italic;
+  font-weight: bold;
+}
+.view {
+  background-color: black;
+  border-radius: 10px;
+  color: white;
+  padding-top: 10px; 
+  font-style: italic;
+  font-weight: bold;
+  font-size: 40px;
+}

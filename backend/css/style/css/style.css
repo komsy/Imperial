@@ -1,0 +1,63 @@
+.body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.card{
+  width: 18rem;
+  margin-top: 10px; 
+  margin-left: 80px;
+}
+/* login and sign up css */
+.log{
+  width: 50%;
+}
+.log span{
+padding-left: 30px;
+}
+.log button{
+  margin-bottom: 20px;
+}
+.log{
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+img {
+  border-radius: 50%;
+  width: 8%;
+  height: 30%;
+  margin-bottom: 20px;
+}
+/* icons css */
+.fa {
+  padding: 20px;
+  font-size: 30px;
+  width: 50px;
+  text-align: center;
+  text-decoration: none;
+  margin: 5px 2px;
+  border-radius: 50%;
+}
+
+.fa:hover {
+    opacity: 0.7;
+}
+
+.fa-facebook {
+  background: #3B5998;
+  color: white;
+}
+
+.fa-twitter {
+  background: #55ACEE;
+  color: white;
+}
+
+
+.fa-linkedin {
+  background: #007bb5;
+  color: white;
+}
+
+.foot{
+  background-color: black;
+  color: white;
+  margin-top: 80px;
