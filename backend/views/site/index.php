@@ -10,44 +10,48 @@ use yii\grid\GridView;
 $this->title = 'Doctors';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="doctor-index">
+<div class="card log">
+  <div class="card-body">
+        <div class="doctor-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+            <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a('Create Doctor', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+            <p>
+                <?= Html::a('Create Doctor', ['create'], ['class' => 'btn btn-success']) ?>
+            </p>
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+            <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+            <?= GridView::widget([
+                'dataProvider' => $dataProvider,
+                'columns' => [
+                    ['class' => 'yii\grid\SerialColumn'],
 
-            'doctorId',
-            //'userId',
-            'doctorName',
-            'phoneNumber',
-            'email:email',
-            'address',
-            //'password',
-            'category',
-            'createdAt:datetime',
+                    'doctorId',
+                    //'userId',
+                    'doctorName',
+                    'phoneNumber',
+                    'email:email',
+                    'address',
+                    //'password',
+                    'category',
+                    'createdAt:datetime',
 
-            [
-                'class' => 'yii\grid\ActionColumn',
-                'buttons'=>[
-                        'delete'=>function ($url) {
-                        return Html::a('<i class="fas fa-trash-alt"></i>',$url,[
-                            'data-method'=>'post',
-                            'data-confirm'=>'Are you sure you want to delete this item?',
-                        ]);
-                        }
-                    ]
+                    [
+                        'class' => 'yii\grid\ActionColumn',
+                        'buttons'=>[
+                                'delete'=>function ($url) {
+                                return Html::a('<i class="fas fa-trash-alt"></i>',$url,[
+                                    'data-method'=>'post',
+                                    'data-confirm'=>'Are you sure you want to delete this item?',
+                                ]);
+                                }
+                            ]
+                        ],
                 ],
-        ],
-    ]); ?>
+            ]); ?>
 
 
+        </div>
+    </div>
 </div>

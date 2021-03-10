@@ -9,7 +9,7 @@ use yii\bootstrap4\Nav;
         'brandLabel' => Yii::$app->name,
         'brandUrl' => Yii::$app->homeUrl,
         'options'=>[
-            'class'=>'shadow-sm navbar navbar-expand-lg navbar-light bg-light'
+            'class'=>'shadow-lg navbar navbar-expand-lg navbar-light bg-light'
         ]
     ]);
 

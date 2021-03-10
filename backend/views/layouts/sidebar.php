@@ -6,7 +6,7 @@ use yii\bootstrap4\Nav;
 	<?php
     echo Nav::widget([
         'options' => [
-            'class' => 'd-flex flex-column nav-pills'
+            'class' => 'shadow-lg d-flex flex-column nav-pills'
         ],
 
         'encodeLabels'=>false,
