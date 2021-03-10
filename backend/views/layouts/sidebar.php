@@ -13,6 +13,10 @@ use yii\bootstrap4\Nav;
 
         'items' => [
             [
+                'label'=>'<i class="fas fa-tachometer-alt"></i> Dashboard',
+                'url'=>['/site/feedback']
+            ],
+            [
                 'label'=>'<i class="fas fa-plus-circle"></i> Add Doctor',
                 'url'=>['/site/index']
             ],
@@ -27,11 +31,7 @@ use yii\bootstrap4\Nav;
             [
                 'label'=>'<i class="fas fa-briefcase-medical"></i> View Donors',
                 'url'=>['/site/viewdonors']
-            ],
-            [
-                'label'=>'<i class="fas fa-comments"></i> Feedback',
-                'url'=>['/site/feedback']
-            ]
+            ]            
         ]
     ]);
     
