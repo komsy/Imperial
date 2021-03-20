@@ -25,8 +25,7 @@ $appoint = Booking::find()->joinWith('category0')->joinWith('doctor')->joinWith(
       <thead style="background-color: green;">
         <tr>
           <th scope="col">Patient's Name</th>
-          <th scope="col">Date</th>
-          <th scope="col">Time</th>
+          <th scope="col">Date And Time</th>
           <th scope="col">Doctor's Name</th>
           <th scope="col">Category</th>
         </tr>
@@ -35,8 +34,7 @@ $appoint = Booking::find()->joinWith('category0')->joinWith('doctor')->joinWith(
         <?php foreach ($appoint as $list) {?>   
           <tr>       
           <td scope="col"><?=$list->patient->patientName ?></td>
-          <td scope="col"><?=$list->date ?></td>
-          <td scope="col"><?=$list->time?></td>
+          <td scope="col"><?=$list->dateAndTime?></td>
           <td scope="col"><?=$list->doctor->doctorName ?></td>
           <td scope="col"><?=$list->category0->category?></td>
           

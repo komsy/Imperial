@@ -2,11 +2,13 @@
 
 use yii\helpers\Html;
 use common\models\User;
-use yii\bootstrap4\ActiveForm;
+use kartik\form\ActiveForm;
 use yii\helpers\ArrayHelper;
 use frontend\models\Category;
 use frontend\models\Patient;
 use frontend\models\Patientimage;
+use kartik\date\DatePicker;
+use kartik\datetime\DateTimePicker;
 
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Donate */
@@ -50,8 +52,23 @@ $patient = Patient::find()->select('patientId')->where(['userId'=>Yii::$app->use
 	             
 	              <?= $form->field($model, 'category')->dropDownList($category,['prompt'=>'Select category'])->label(false) ?>
 	              <?= $form->field($model, 'patientId')->hiddenInput(['value' => $patient->patientId, 'readonly'=>true])->label(false)  ?>
-	              <?= $form->field($model, 'date') ?>
-	              <?= $form->field($model, 'time') ?>
+                <?php echo $form->field($model, 'dateAndTime')->widget(
+                  DateTimePicker::class, 
+                  [
+                      'options' => ['placeholder' => 'Select date and time ...'],
+                      'convertFormat' => true,
+                      'layout' => '{picker}{input}{remove}',
+                      'removeButton' => ['position' => 'append'],
+                      'pluginOptions' => [
+                          'format' => 'dd-MM-yyyy HH:i P',
+                          'showMeridian' => true,
+                          'todayHighlight' => true,
+                          'autoclose' => true,
+                          'weekStart' => 1,
+                      ]
+                  ]
+                  );
+              ?>
 	          
 	              <div class="form-group">
 	                  <?= Html::submitButton('Submit', ['class' => 'btn btn-primary']) ?>
@@ -63,4 +80,3 @@ $patient = Patient::find()->select('patientId')->where(['userId'=>Yii::$app->use
 	  </div>
     </div>
   </div>
-

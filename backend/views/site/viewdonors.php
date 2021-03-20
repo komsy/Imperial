@@ -23,12 +23,12 @@ $donors = Donate::find()->joinWith('patient')->joinWith('organType0')->all();
       <thead style="background-color: green;">
         <tr>
           
-          <th scope="col">Patient's Name</th>
+          <th scope="col">Donor's Name</th>
           <th scope="col">Phone Number</th>
-          <th scope="col">Email</th>
-          <th scope="col">Address</th>
+          <th scope="col">Email Address</th>
+          <th scope="col">Location</th>
           <th scope="col">Blood Type</th>
-          <th scope="col">Organ</th>
+          <th scope="col">Organ Type</th>
         </tr>
       </thead>
       <tbody>

@@ -11,15 +11,13 @@ use Yii;
  * @property int $category
  * @property int $patientId
  * @property int $doctorId
- * @property string $date
- * @property string $time
+ * @property string $dateAndTime
  * @property string $Status
  * @property string $createdAt
  *
  * @property Patient $patient
  * @property Category $category0
  * @property Doctor $doctor
- * @property Meet[] $meets
  */
 class Booking extends \yii\db\ActiveRecord
 {
@@ -37,10 +35,10 @@ class Booking extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['category', 'patientId', 'doctorId', 'date', 'time'], 'required'],
+            [['category', 'patientId', 'doctorId', 'dateAndTime'], 'required'],
             [['category', 'patientId', 'doctorId'], 'integer'],
-            [['date', 'time', 'createdAt'], 'safe'],
-            [['Status'], 'string', 'max' => 100],
+            [['createdAt'], 'safe'],
+            [['dateAndTime', 'Status'], 'string', 'max' => 100],
             [['patientId'], 'exist', 'skipOnError' => true, 'targetClass' => Patient::className(), 'targetAttribute' => ['patientId' => 'patientId']],
             [['category'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['category' => 'cartegoryId']],
             [['doctorId'], 'exist', 'skipOnError' => true, 'targetClass' => Doctor::className(), 'targetAttribute' => ['doctorId' => 'doctorId']],
@@ -57,8 +55,7 @@ class Booking extends \yii\db\ActiveRecord
             'category' => 'Category',
             'patientId' => 'Patient ID',
             'doctorId' => 'Doctor ID',
-            'date' => 'Date',
-            'time' => 'Time',
+            'dateAndTime' => 'Date And Time',
             'Status' => 'Status',
             'createdAt' => 'Created At',
         ];
@@ -93,14 +90,4 @@ class Booking extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Doctor::className(), ['doctorId' => 'doctorId']);
     }
-
-    /**
-     * Gets query for [[Meets]].
-     *
-     * @return \yii\db\ActiveQuery
-     
-    public function getMeets()
-    {
-        return $this->hasMany(Meet::className(), ['bookId' => 'bookId']);
-    }*/
 }

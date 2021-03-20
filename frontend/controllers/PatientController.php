@@ -3,6 +3,8 @@
 namespace frontend\controllers;
 
 use Yii;
+use yii\helpers\Url;
+use common\models\User;
 use frontend\models\Patient;
 use frontend\models\PatientSearch;
 use yii\web\Controller;
@@ -10,6 +12,8 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
 use frontend\models\Doctor;
+use frontend\models\Booking;
+use frontend\models\Patientimage;
 
 /**
  * PatientController implements the CRUD actions for Patient model.
@@ -76,30 +80,41 @@ class PatientController extends Controller
             'model' => $model,
         ]);
     }
-    public function actionMyinfo()
-        {
-            return $this->render('myinfo');
-        }
+
     public function actionPatientinfo()
     {
-        $model = new Patient();
-        $image = new \frontend\models\Patientimage();
+        if(Yii::$app->user->isGuest){
+            $Msg = '<div class="alert alert-danger alert-dismissable" role="alert">
+                    <h3>User is not logged!</h3>
+                     
+                    </div>';
+            \Yii::$app->session->setFlash('error', $Msg);
+            $this->redirect(['site/index']);
+       } 
+           else  if(\Yii::$app->user->can('Patient')) {
+            $model = new Patient();
+            $image = new \frontend\models\Patientimage();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            if($this->saveImage($model->patientId,Yii::$app->request->post()['Patientimage'])){
-            return $this->redirect(['view', 'id' => $model->patientId]);
-                }
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                if($this->saveImage($model->patientId,Yii::$app->request->post()['Patientimage'])){
+                return $this->redirect(['view', 'id' => $model->patientId]);
+                    }
+            }
+            return $this->render('patientinfo', [
+                'model' => $model,
+                'image'=>$image
+            ]);
         }
-        return $this->render('patientinfo', [
-            'model' => $model,
-            'image'=>$image
-        ]);
+        else{
+             Yii::$app->session->setFlash('success', 'Welcome Doctor, Glad to have you!');            
+            $this->redirect(['doctor/viewappointment']);
+        }
     }
 
     /*Creates a new Patientimage*/
     public function saveImage($patientId,$imagedata)
     {
-        $model = new \frontend\models\Patientimage();
+        $model = new Patientimage();
 
          if($model->load(["Patientimage"=>['imagePath'=>$imagedata['imagePath']]]))
         {
@@ -120,56 +135,65 @@ class PatientController extends Controller
 
     public function actionBookappointment()
     {
-        $model = new \frontend\models\Booking();
+        $checkbook = Patient::find()->where(['userId'=>Yii::$app->user->id])->one();
+        if(empty($checkbook)){ //checks if logged patient has created profile 
+            $Msg = '<div class="alert alert-danger alert-dismissable" role="alert">
+                    <h3>Kindly first create your profile!</h3>
+                     
+                    </div>';
+            \Yii::$app->session->setFlash('error', $Msg);
+            $this->redirect(['patient/patientinfo']);
+       } 
+       else{
+            $model = new Booking();
 
-        if ($model->load(Yii::$app->request->post())) 
-             {
-        $doc = Doctor::find()->select('doctorId')->where('category=:category')->addParams([':category' => $model['category']])->one(); 
-        $data = ['Booking'=>['category'=>$model['category'], 'patientId'=>$model['patientId'],'date'=>$model['date'],'time'=>$model['time'],'doctorId'=>$doc->doctorId]];
-        /*
-        var_dump($data); exit();*/
-         if($model->load($data) && $model->save()){
-        return $this->redirect(['patient/viewappointment']);
-        } 
+            if ($model->load(Yii::$app->request->post())) 
+                 {
+            $doc = Doctor::find()->select('doctorId')->where('category=:category')->addParams([':category' => $model['category']])->one(); 
+            $data = ['Booking'=>['category'=>$model['category'], 'patientId'=>$model['patientId'],'dateAndTime'=>$model['dateAndTime'],'doctorId'=>$doc->doctorId]];
+            /*
+            var_dump($data); exit();*/
+             if($model->load($data) && $model->save()){
+            return $this->redirect(['patient/viewappointment']);
+            } 
+            }
+            return $this->render('bookappointment', [
+                'model' => $model,
+            ]);
         }
-        return $this->render('bookappointment', [
-            'model' => $model,
-        ]);
     }
-/*
-    public function createMeet($bookId,$category,$patientId){
-        $model = new \frontend\models\Meet();
-       
-       $doc = Doctor::find()->select('doctorId')->where('category=:category')->addParams([':category' => $category])->one();
 
-          
-        $sql = 'SELECT doctorId FROM doctor WHERE category=:category';      
-        $doc = Doctor::findBySql($sql, [':category'=>$category])->one();
-        $data = ['Meet'=>['bookId'=>$bookId,'categoryId'=>$category,'patientId'=>$patientId, 'doctorId'=>$doc->doctorId]];
-        if($model->load($data) && $model->save()){
-            return true;
-        }
-        return false;
-    }
-*/
     public function actionViewappointment()
-        {
-            return $this->render('viewappointment');
-        }
+    {
+    
+        return $this->render('viewappointment');
+    }
         
     public function actionDonate()
     {
-        $model = new \frontend\models\Donate();
+        $checkdonor = Patient::find()->where(['userId'=>Yii::$app->user->id])->one();
+        if(empty($checkdonor)){ //checks if logged patient has created profile 
+            $Msg = '<div class="alert alert-danger alert-dismissable" role="alert">
+                    <h3>Kindly first create your profile!</h3>
+                     
+                    </div>';
+            \Yii::$app->session->setFlash('error', $Msg);
+            $this->redirect(['patient/patientinfo']);
+       } 
+       else{
 
-        if ($model->load(Yii::$app->request->post())) {
-            
-         $model->save();
-        return $this->redirect(['site/index']);
+            $model = new \frontend\models\Donate();
+
+            if ($model->load(Yii::$app->request->post())) {
+                
+             $model->save();
+            return $this->redirect(['site/index']);
+            }
+
+            return $this->render('donate', [
+                'model' => $model,
+            ]);
         }
-
-        return $this->render('donate', [
-            'model' => $model,
-        ]);
     }
     public function actionAddfeedback()
     {

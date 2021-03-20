@@ -19,6 +19,7 @@ AppAsset::register($this);
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
@@ -55,7 +56,7 @@ AppAsset::register($this);
      }
      if(\Yii::$app->user->can('Patient')) {
   
-        $menuItems[] = ['label' => 'Create Profile <i class="fas fa-plus-circle"></i>', 'url' => ['/patient/patientinfo'] ];
+        $menuItems[] = ['label' => 'Create Profile', 'url' => ['/patient/patientinfo'] ];
         $menuItems[] = ['label' => 'Book Appointment', 'url' => ['/patient/bookappointment'] ];
         $menuItems[] = ['label' => 'View Appointment', 'url' => ['/patient/viewappointment'] ];
         $menuItems[] = ['label' => 'Donate Organ', 'url' => ['/patient/donate'] ];

@@ -16,18 +16,20 @@ use yii\bootstrap4\Nav;
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Login <i class="fas fa-sign-in-alt"></i>', 'url' => ['/site/login']];
     } else {
+
+         
         $menuItems[] = ['label' => 'Logout <i class="fas fa-sign-out-alt"></i> ('.Yii::$app->user->identity->username.')',
             'url'=>['site/logout'],
             'linkOptions'=>[
                 'data-method'=>'post'
             ]
         ];
-    }
     
+    }
     echo Nav::widget([
-        'options' => ['class' => 'navbar-nav ml-auto'],
+        'options' => ['class' => 'navbar-nav ml-auto '],
+        'encodeLabels' => false,
         'items' => $menuItems,
-          'encodeLabels'=>false,
     ]);
     NavBar::end();
     ?>

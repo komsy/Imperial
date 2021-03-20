@@ -13,6 +13,7 @@ use frontend\models\Category;
 /* @var $form yii\widgets\ActiveForm */
 
 $category = ArrayHelper::map(Category::find()->all(), 'cartegoryId', 'category');
+$doc = ArrayHelper::map(User::find()->all(), 'id', 'username');
 ?>
 <div class="container" style="margin-top: 20px;">
     <div class="card log">
@@ -28,7 +29,7 @@ $category = ArrayHelper::map(Category::find()->all(), 'cartegoryId', 'category')
 
             <?php $form = ActiveForm::begin(); ?>
 
-            <?= $form->field($model, 'userId')->textInput() ?>
+            <?= $form->field($model, 'userId')->textInput()->dropDownList($doc,['prompt'=>'Select Doctor']) ?>
 
             <?= $form->field($model, 'doctorName')->textInput(['maxlength' => true]) ?>
 

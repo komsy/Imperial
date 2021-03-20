@@ -26,8 +26,7 @@ $category = Booking::find()->joinWith('category0')->joinWith('doctor')->joinWith
 <table class="table caption-top">
   <thead style="background-color: green;">
     <tr>
-      <th scope="col">Date</th>
-      <th scope="col">Time</th>
+      <th scope="col">Date and Time</th>
       <th scope="col">Doctor's Name</th>
       <th scope="col">Category</th>
     </tr>
@@ -35,8 +34,7 @@ $category = Booking::find()->joinWith('category0')->joinWith('doctor')->joinWith
   <tbody>
     <?php foreach ($category as $list) {?>   
       <tr>       
-      <td scope="col"><?=$list->date ?></td>
-      <td scope="col"><?=$list->time?></td>
+      <td scope="col"><?=$list->dateAndTime ?></td>
       <td scope="col"><?=$list->doctor->doctorName ?></td>
       <td scope="col"><?=$list->category0->category?></td>
       

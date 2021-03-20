@@ -7,6 +7,7 @@ use common\models\User;
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Patient */
 /* @var $form ActiveForm */
+
 ?>
 <!-- <div class="row text-center" >
     <div class="col" > 
@@ -17,7 +18,7 @@ use common\models\User;
 <div class="container">
     <div class="row text-center" >
         <div class="col" > 
-            <button class="btn btn-dark view" style="width: 100%; background-color: green;"> <i class="fas fa-plus-circle"></i>Create Profile </button>
+            <button class="btn btn-dark view" style="width: 100%; background-color: green;"> <i class="fas fa-plus-circle"></i> Create Profile </button>
         </div>
     </div>
 <div class="patientinfo">
